@@ -11,6 +11,10 @@ from agents.followup_agent import FollowupAgent
 from utils.io import write_json, write_csv
 from utils.sample_data import SAMPLE_OPPORTUNITIES
 
+from fastapi import FastAPI
+
+app = FastAPI()
+
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "outputs"
 APP_DIR = OUTPUT_DIR / "generated_applications"
