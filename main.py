@@ -15,6 +15,10 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {"status": "ok"}
+    
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "outputs"
 APP_DIR = OUTPUT_DIR / "generated_applications"
