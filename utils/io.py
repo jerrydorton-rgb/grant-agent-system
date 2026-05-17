@@ -1,0 +1,28 @@
+from __future__ import annotations
+
+import csv
+import json
+import re
+from pathlib import Path
+from typing import Any
+
+
+def write_json(path: Path, data: Any) -> None:
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+
+
+def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
+    if not rows:
+        path.write_text("")
+        return
+    fieldnames = list(rows[0].keys())
+    with path.open("w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def slugify(value: str) -> str:
+    value = value.lower().strip()
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    return value.strip("-")[:120] or "untitled"
